@@ -1,0 +1,55 @@
+/* conditions.css */
+
+.alert-list {
+  list-style: none;
+  padding: 0;
+}
+
+.alert {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.alert .icon {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+}
+
+.alert div {
+  flex: 1;
+}
+
+.alert h3 {
+  margin-top: 0;
+}
+
+/* Visitor Centers and Activities sections */
+.visitor-center-list details,
+.activity-list details {
+  border: 1px solid #ddd;
+  margin-bottom: 0.5rem;
+  padding: 1rem;
+  border-radius: 4px;
+}
+
+.visitor-center-list summary,
+.activity-list summary {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.visitor-center-list details[open] summary,
+.activity-list details[open] summary {
+  margin-bottom: 1rem;
+}
+
+.visitor-center-list p,
+.activity-list p {
+  margin: 0.5rem 0;
+}
