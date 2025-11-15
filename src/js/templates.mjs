@@ -31,27 +31,25 @@ export function alertTemplate(alert) {
 }
 
 export function visitorCenterTemplate(center) {
-  return `<details name="visitor-centers">
-    <summary>${center.name}</summary>
-    <p>${center.description}</p>
-    <p><strong>Directions:</strong> ${center.directionsInfo}</p>
-  </details>`;
+  return `<li class="visitor-center">
+  <h4>${center.name}</h4>
+  <p>${center.description}</p>
+  <p>${center.directionsInfo}</p>
+  </li>`;
 }
 
-export function activityTemplate(activity) {
-  return `<details name="activities">
-    <summary>${activity.name}</summary>
-  </details>`;
+export function activityListTemplate(activities) {
+  return activities.map((activity) => `<li>${activity.name}</li>`).join("");
 }
 
 export function mediaCardTemplate(info) {
   return `<div class="media-card">
     <a href="${info.link}">
-      <img src="${info.image}" alt="">
-      <h3>${info.name}</h3>
+    <img src="${info.image}" alt="${info.name}" class="media-card__img">
+    <h3 class="media-card__title">${info.name}</h3>
     </a>
-    <p>${info.description}</p>
-  </div>`;
+   <p>${info.description}</p>
+     </div>`;
 }
 
 function getMailingAddress(addresses) {

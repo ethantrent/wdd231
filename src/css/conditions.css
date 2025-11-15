@@ -1,55 +1,47 @@
-/* conditions.css */
+/* current conditions styles */
 
-.alert-list {
+main {
+  padding: 1rem;
+}
+
+/* alerts */
+
+.alerts > ul {
   list-style: none;
   padding: 0;
 }
 
 .alert {
+  margin: 0.5rem;
+  padding: 0.5rem 0 0.8rem 0;
   display: flex;
-  gap: 1rem;
-  padding: 1rem;
-  border: 1px solid #ddd;
-  margin-bottom: 1rem;
-  border-radius: 4px;
-}
-
-.alert .icon {
-  width: 3rem;
-  height: 3rem;
-  flex-shrink: 0;
-}
-
-.alert div {
-  flex: 1;
+  gap: 1em;
+  border-bottom: 1px solid var(--bs-grey-3);
 }
 
 .alert h3 {
-  margin-top: 0;
+  margin: 0;
+  font-size: 1.2em;
 }
 
-/* Visitor Centers and Activities sections */
-.visitor-center-list details,
-.activity-list details {
-  border: 1px solid #ddd;
-  margin-bottom: 0.5rem;
-  padding: 1rem;
-  border-radius: 4px;
+.alert p {
+  margin: 0;
 }
 
-.visitor-center-list summary,
-.activity-list summary {
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1.1rem;
+.alert svg {
+  height: 30px;
+  width: 30px;
+  margin: 0.25em;
+  flex: 0 0 auto;
 }
 
-.visitor-center-list details[open] summary,
-.activity-list details[open] summary {
-  margin-bottom: 1rem;
+/* visitor styles */
+
+.visitor > details > ul {
+  list-style: none;
+  padding: 0;
+}
+.visitor > details li {
+  border-bottom: 1px solid var(--bs-grey-3);
 }
 
-.visitor-center-list p,
-.activity-list p {
-  margin: 0.5rem 0;
-}

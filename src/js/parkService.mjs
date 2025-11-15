@@ -12,7 +12,14 @@ async function getJson(url) {
   const response = await fetch(baseUrl + url, options);
   if (response.ok) {
     data = await response.json();
-  } else throw new Error("response not ok");
+  } else {
+    // Get more details about the error
+    const errorText = await response.text();
+    console.error(`API Error: ${response.status} ${response.statusText}`);
+    console.error(`Response:`, errorText);
+    console.error(`API Key present:`, apiKey ? "Yes" : "No");
+    throw new Error(`response not ok: ${response.status} ${response.statusText}`);
+  }
   return data;
 }
 
@@ -21,14 +28,14 @@ export async function getParkData() {
   return parkData.data[0];
 }
 
-export async function getAlertData(parkCode) {
-  const alertData = await getJson(`alerts?parkCode=${parkCode}`);
-  return alertData.data;
+export async function getParkAlerts(code) {
+  const parkData = await getJson(`alerts?parkCode=${code}`);
+  return parkData.data;
 }
 
-export async function getVisitorCenterData(parkCode) {
-  const visitorCenterData = await getJson(`visitorcenters?parkCode=${parkCode}`);
-  return visitorCenterData.data;
+export async function getParkVisitorCenters(code) {
+  const parkData = await getJson(`visitorcenters?parkCode=${code}`);
+  return parkData.data;
 }
 
 export function getInfoLinks(images) {

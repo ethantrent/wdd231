@@ -1,73 +1,42 @@
-// Navigation module - handles all navigation interactions
+function mainMenuHandler(ev) {
+  let target = ev.target;
+  // toggle the show class on the global-nav
+  document.querySelector(".global-nav").classList.toggle("show");
+  // check to see if ev.target is the button or something inside the button
+  if (target.tagName != "BUTTON") {
+    target = target.closest("button");
+  }
+  // check to see if we just opened or closed the menu
+  if (document.querySelector(".global-nav").classList.contains("show")) {
+    // if we opened it then set the aria-expanded attribute to true
+    target.setAttribute("aria-expanded", true);
+  } else {
+    // if we closed it then set the aria-expanded attribute to false
+    target.setAttribute("aria-expanded", false);
+  }
 
-function toggleMenu(element) {
-  element.classList.toggle("show");
+  console.log("toggle");
 }
 
-function toggleSubmenu(event) {
-  // Get the button that was clicked
-  let button = event.target;
-  
-  // Make sure we have the button element (not something inside it)
-  if (button.tagName !== "BUTTON") {
-    button = button.closest("button");
-  }
-  
-  // Find the parent li and then the submenu ul inside it
-  const parentLi = button.closest("li");
-  const submenu = parentLi.querySelector(".global-nav__submenu");
-  
-  if (submenu) {
-    // Toggle the show class on the submenu
-    submenu.classList.toggle("show");
-    
-    // Toggle the open class on the button for arrow rotation
-    button.classList.toggle("open");
-  }
-}
-
-function setupSubmenuToggles() {
-  // Get all submenu toggle buttons
-  const submenuButtons = document.querySelectorAll(".global-nav__split-button__toggle");
-  
-  // Add click event listener to each button
-  submenuButtons.forEach((button) => {
-    button.addEventListener("click", toggleSubmenu);
-  });
-}
-
-function setupMainMenuToggle() {
-  // Get the main menu button
-  const menuButton = document.querySelector("#global-nav-toggle");
-  const globalNav = document.querySelector(".global-nav");
-  
-  if (menuButton && globalNav) {
-    menuButton.addEventListener("click", (event) => {
-      let target = event.target;
-      
-      // Check to see if target is the button or something inside the button
-      if (target.tagName !== "BUTTON") {
-        target = target.closest("button");
-      }
-      
-      // Toggle the show class on the global-nav
-      toggleMenu(globalNav);
-      
-      // Check to see if we just opened or closed the menu
-      if (globalNav.classList.contains("show")) {
-        // If we opened it then set the aria-expanded attribute on the button to true
-        target.setAttribute("aria-expanded", "true");
-        target.setAttribute("aria-label", "Close Menu");
-      } else {
-        // If we closed it then set the aria-expanded attribute on the button to false
-        target.setAttribute("aria-expanded", "false");
-        target.setAttribute("aria-label", "Open Menu");
-      }
-    });
-  }
+function subMenuHandler(ev) {
+  // find the closest li ancestor, then find the submenu inside of that li and toggle the show class
+  ev.currentTarget
+    .closest("li")
+    .querySelector(".global-nav__submenu")
+    .classList.toggle("show");
+  // toggle the rotate class on the button icon that was clicked
+  ev.currentTarget.querySelector(".icon").classList.toggle("rotate");
 }
 
 export default function enableNavigation() {
-  setupMainMenuToggle();
-  setupSubmenuToggles();
+  const menuButton = document.querySelector("#global-nav-toggle");
+  const subMenuToggles = document.querySelectorAll(
+    ".global-nav__split-button__toggle"
+  );
+  // when the main menu button is clicked:
+  menuButton.addEventListener("click", mainMenuHandler);
+  subMenuToggles.forEach((toggle) => {
+    //for each submenu toggle
+    toggle.addEventListener("click", subMenuHandler);
+  });
 }

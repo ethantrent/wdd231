@@ -1,92 +1,32 @@
-/* Main content styling */
-
-main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
+/* Intro and info sections */
 
 .intro {
-  text-align: center;
-  margin-bottom: 3rem;
+  padding: 1em;
 }
 
-.intro h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: var(--bs-grey-4);
+.intro > h1,
+main > h1 {
+  font-family: var(--bs-font-serif);
+  font-size: 2em;
+  font-weight: normal;
 }
-
-.intro p {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0 auto;
-  color: var(--bs-grey-2);
-}
-
-/* Info section with media cards */
 
 .info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
 }
 
-.media-card {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.info > * {
+  flex: 1;
 }
 
-.media-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-
-.media-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.media-card a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.media-card h3 {
-  font-size: 1.3rem;
-  margin: 1rem;
-  color: var(--bs-chathams-blue);
-}
-
-.media-card p {
-  margin: 0 1rem 1.5rem;
-  color: var(--bs-grey-2);
-  line-height: 1.5;
-}
-
-/* Responsive design */
-
-@media (max-width: 768px) {
-  .intro h1 {
-    font-size: 2rem;
-  }
-  
+@media screen and (min-width: 630px) {
   .info {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  
-  main {
-    padding: 1rem;
-  }
-  
-  .media-card img {
-    height: 150px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
   }
 }
+

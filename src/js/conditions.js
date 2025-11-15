@@ -1,69 +1,44 @@
-import "../css/style.css"; // we can do this type of import because we are using Vite
+import "../css/style.css";
 import "../css/conditions.css";
-import { getParkData, getAlertData, getVisitorCenterData } from "./parkService.mjs";
+import {
+  getParkData,
+  getParkAlerts,
+  getParkVisitorCenters
+} from "./parkService.mjs";
+import {
+  activityListTemplate,
+  alertTemplate,
+  visitorCenterTemplate
+} from "./templates.mjs";
 import setHeaderFooter from "./setHeaderFooter.mjs";
-import { alertTemplate, visitorCenterTemplate, activityTemplate } from "./templates.mjs";
 
 function setAlerts(alerts) {
-  const alertListEl = document.querySelector(".alert-list");
+  const alertsContainer = document.querySelector(".alerts > ul");
+  alertsContainer.innerHTML = "";
   const html = alerts.map(alertTemplate);
-  alertListEl.innerHTML = html.join("");
+  alertsContainer.insertAdjacentHTML("afterbegin", html.join(""));
 }
 
 function setVisitorCenters(centers) {
-  const centerListEl = document.querySelector(".visitor-center-list");
+  const centersContainer = document.querySelector(".visitor ul");
   const html = centers.map(visitorCenterTemplate);
-  centerListEl.innerHTML = html.join("");
+  centersContainer.insertAdjacentHTML("afterbegin", html.join(""));
 }
 
 function setActivities(activities) {
-  const activityListEl = document.querySelector(".activity-list");
-  const html = activities.map(activityTemplate);
-  activityListEl.innerHTML = html.join("");
-}
-
-function enableNavigation() {
-  // use a querySelector to get the menu button
-  const menuButton = document.querySelector("#global-nav-toggle");
-  const globalNav = document.querySelector(".global-nav");
-    
-  // when the main menu button is clicked:
-  menuButton.addEventListener("click", (ev) => {
-    let target = ev.target;
-    
-    // check to see if target is the button or something inside the button
-    if (target.tagName !== "BUTTON") {
-      target = target.closest("button");
-    }
-    
-    // toggle the show class on the global-nav
-    globalNav.classList.toggle("show");
-    
-    // check to see if we just opened or closed the menu
-    if (globalNav.classList.contains("show")) {
-      // if we opened it then set the aria-expanded attribute on the button to true
-      target.setAttribute("aria-expanded", "true");
-      target.setAttribute("aria-label", "Close Menu");
-    } else {
-      // if we closed it then set the aria-expanded attribute on the button to false
-      target.setAttribute("aria-expanded", "false");
-      target.setAttribute("aria-label", "Open Menu");
-    }
-  });
+  const activitiesContainer = document.querySelector(".activities ul");
+  const html = activityListTemplate(activities);
+  activitiesContainer.insertAdjacentHTML("afterbegin", html);
 }
 
 async function init() {
   const parkData = await getParkData();
+  const alerts = await getParkAlerts(parkData.parkCode);
+  const visitorCenters = await getParkVisitorCenters(parkData.parkCode);
   setHeaderFooter(parkData);
-  
-  const alerts = await getAlertData(parkData.parkCode);
   setAlerts(alerts);
-  
-  const visitorCenters = await getVisitorCenterData(parkData.parkCode);
   setVisitorCenters(visitorCenters);
-  
   setActivities(parkData.activities);
-  enableNavigation();
 }
 
 init();

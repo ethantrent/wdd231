@@ -1,4 +1,4 @@
-import "../css/style.css"; // we can do this type of import because we are using Vite
+import "../css/style.css"; // we can do this because we are using Vite...
 import "../css/home.css";
 import { getParkData, getInfoLinks } from "./parkService.mjs";
 import setHeaderFooter from "./setHeaderFooter.mjs";
@@ -20,11 +20,10 @@ function setParkInfoLinks(data) {
 
 async function init() {
   const parkData = await getParkData();
-  const parkInfoLinks = getInfoLinks(parkData.images);
-
+  const links = getInfoLinks(parkData.images);
   setHeaderFooter(parkData);
   setParkIntro(parkData);
-  setParkInfoLinks(parkInfoLinks);
+  setParkInfoLinks(links);
 }
 
 init();

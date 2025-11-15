@@ -17,7 +17,7 @@ function setHeaderInfo(data) {
 
 function setFooter(data) {
   const footerEl = document.querySelector("#park-footer");
-  footerEl.innerHTML = footerTemplate(data);
+  footerEl.insertAdjacentHTML("afterbegin", footerTemplate(data));
 }
 
 export default function setHeaderFooter(data) {
